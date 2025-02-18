@@ -9,7 +9,7 @@ class AppRoutes {
   static Map<String, WidgetBuilder> getRoutes() {
     return {
       onboarding: (context) => const OnboardingScreen(),
-      followCommunity: (context) => FollowSaaSPage(),
+      followCommunity: (context) => const FollowCommunity()
     };
   }
 }

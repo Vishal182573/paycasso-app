@@ -18,7 +18,7 @@ class OnboardingScreen extends StatelessWidget {
               ),
             ),
             child:
-                Container(color: Colors.black.withOpacity(0.9)), // Dark Overlay
+                Container(color: Colors.black.withOpacity(0.86)), // Dark Overlay
           ),
 
           // Content
