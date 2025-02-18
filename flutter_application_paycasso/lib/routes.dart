@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_paycasso/screens/afterLogin/followCommunity.dart';
-import 'package:flutter_application_paycasso/screens/beforeLogin/onboard.dart';
+import 'package:flutter_application_paycasso/screens/beforeLogin/onboarding.dart';
 
 class AppRoutes {
   static const String onboarding = '/';
