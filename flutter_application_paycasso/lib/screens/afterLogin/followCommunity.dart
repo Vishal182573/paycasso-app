@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_paycasso/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FollowCommunity extends StatefulWidget {
   const FollowCommunity({super.key});
 
-  @override
+  // @override
   State<FollowCommunity> createState() => _FollowCommunityState();
 }
 
@@ -24,7 +25,7 @@ class _FollowCommunityState extends State<FollowCommunity> {
               child: FloatingActionButton.extended(
                 backgroundColor: Colors.white,
                 onPressed: () {
-                  // Add your navigation logic here
+                  Navigator.pushNamed(context, AppRoutes.home);
                 },
                 label: Text(
                   'Continue',
