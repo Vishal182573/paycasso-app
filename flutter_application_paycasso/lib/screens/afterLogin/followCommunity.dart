@@ -146,6 +146,7 @@ class _FollowCommunityState extends State<FollowCommunity> {
         ),
       ),
     );
+    
   }
 
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_paycasso/routes.dart';
+import 'package:flutter_application_paycasso/screens/afterLogin/homeScreen.dart';
+import 'package:flutter_application_paycasso/screens/afterLogin/paycassoCommunity.dart';
 
 class CustomNavigationBar extends StatefulWidget {
   final int currentIndex;
@@ -19,7 +21,6 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
   void _onItemTapped(int index) {
     widget.onIndexChanged(index);
 
-    // Use pushReplacementNamed to replace the current screen instead of stacking
     switch (index) {
       case 0:
         if (widget.currentIndex != 0) {
@@ -41,7 +42,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       height: 60,
       decoration: BoxDecoration(
-        color: Colors.grey[900],
+        color: Colors.grey[900]?.withOpacity(0.7),
         borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
@@ -78,6 +79,7 @@ class _NavBarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
+      behavior: HitTestBehavior.opaque,
       child: Icon(
         icon,
         color: isSelected ? Colors.purple[200] : Colors.grey[400],

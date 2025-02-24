@@ -9,6 +9,42 @@ class AppRoutes {
   static const String followCommunity = '/follow-community';
   static const String home = '/home';
   static const String paycassoCommunity = '/paycasso-community';
+
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case onboarding:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const OnboardingScreen(),
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero,
+        );
+      case followCommunity:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const FollowCommunity(),
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero,
+        );
+      case home:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const HomeScreen(),
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero,
+        );
+      case paycassoCommunity:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const PaycassoCommunity(),
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero,
+        );
+      default:
+        return MaterialPageRoute(builder: (_) => const OnboardingScreen());
+    }
+  }
+
   static Map<String, WidgetBuilder> getRoutes() {
     return {
       onboarding: (context) => const OnboardingScreen(),
