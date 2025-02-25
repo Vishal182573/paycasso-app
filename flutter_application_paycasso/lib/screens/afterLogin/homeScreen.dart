@@ -15,6 +15,27 @@ class _HomeScreenState extends State<HomeScreen> {
       0; // Setting to 1 as Ethereum icon is selected in screenshot
   bool showAllSubscriptions = false;
 
+  final List<Map<String, String>> subscriptionItems = [
+    {
+      'title': 'Figma',
+      'subtitle': 'Due in 4 days',
+      'amount': '\$14.00',
+      'logo': 'assets/icons/figma_logo.png',
+    },
+    {
+      'title': 'Canva',
+      'subtitle': 'Bill Paid',
+      'amount': '\$6.99',
+      'logo': 'assets/icons/canva_logo.png',
+    },
+    {
+      'title': 'Chatgpt',
+      'subtitle': 'Due in a week',
+      'amount': '\$10.49',
+      'logo': 'assets/icons/chatgpt_logo.png',
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,8 +106,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       //focalPoint: Alignment.center,
                       radius: 1,
                       colors: [
-                        Colors.white.withOpacity(0.1),
-                        Colors.grey.withOpacity(0.1),
+                        Colors.white.withOpacity(0.4),
+                        Colors.black.withOpacity(0.9),
                       ],
                     ),
                     border: Border.all(
@@ -269,25 +290,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: 26.h),
 
                 // Subscription List
-                buildSubscriptionItem(
+                _buildSubscriptionItem(
                   'Figma',
                   'Due in 4 days',
                   '\$14.00',
-                  Icons.grid_3x3,
+                  'assets/icons/figma_logo.png',
                   hasDivider: true,
                 ),
-                buildSubscriptionItem(
+                _buildSubscriptionItem(
                   'Canva',
                   'Bill Paid',
                   '\$6.99',
-                  Icons.palette_outlined,
+                  'assets/icons/canva_logo.png',
                   hasDivider: true,
                 ),
-                buildSubscriptionItem(
+                _buildSubscriptionItem(
                   'Chatgpt',
                   'Due in a week',
                   '\$10.49',
-                  Icons.all_inclusive,
+                  'assets/icons/chatgpt_logo.png',
                   hasDivider: false,
                 ),
               ],
@@ -306,13 +327,9 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget buildSubscriptionItem(
-    String title,
-    String subtitle,
-    String amount,
-    IconData icon, {
-    required bool hasDivider,
-  }) {
+  Widget _buildSubscriptionItem(
+      String title, String subtitle, String amount, String logoPath,
+      {required bool hasDivider}) {
     return Column(
       children: [
         Row(
@@ -321,13 +338,13 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 56.w,
               height: 56.w,
               decoration: BoxDecoration(
-                color: Colors.grey[800],
+                color: Colors.grey[900],
                 borderRadius: BorderRadius.circular(16.r),
               ),
-              child: Icon(
-                icon,
-                color: Colors.white,
-                size: 24.sp,
+              child: Image.asset(
+                logoPath,
+                width: 24.w,
+                height: 24.w,
               ),
             ),
             SizedBox(width: 16.w),
