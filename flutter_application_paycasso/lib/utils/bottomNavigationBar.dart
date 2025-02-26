@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_application_paycasso/routes.dart';
-import 'package:flutter_application_paycasso/screens/afterLogin/homeScreen.dart';
-import 'package:flutter_application_paycasso/screens/afterLogin/paycassoCommunity.dart';
 
 class CustomNavigationBar extends StatefulWidget {
   final int currentIndex;
@@ -18,72 +18,95 @@ class CustomNavigationBar extends StatefulWidget {
 }
 
 class _CustomNavigationBarState extends State<CustomNavigationBar> {
-  void _onItemTapped(int index) {
-    widget.onIndexChanged(index);
-
-    switch (index) {
-      case 0:
-        if (widget.currentIndex != 0) {
-          Navigator.pushReplacementNamed(context, AppRoutes.home);
-        }
-        break;
-      case 1:
-        if (widget.currentIndex != 1) {
-          Navigator.pushReplacementNamed(context, AppRoutes.paycassoCommunity);
-        }
-        break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(20),
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      height: 60,
+      margin: EdgeInsets.symmetric(horizontal: 37.w, vertical: 16.h),
+      height: 70.h,
       decoration: BoxDecoration(
-        color: Colors.grey[900]?.withOpacity(0.7),
-        borderRadius: BorderRadius.circular(30),
+        color: const Color.fromARGB(121, 28, 28, 28),
+        borderRadius: BorderRadius.circular(35.r),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _NavBarItem(
-            icon: Icons.home,
-            isSelected: widget.currentIndex == 0,
-            onTap: () => _onItemTapped(0),
+          _buildNavItem(
+            index: 0,
+            iconPath: 'assets/icons/home.svg',
+            label: 'Home',
+            route: AppRoutes.home,
           ),
-          _NavBarItem(
-            icon: Icons.currency_pound_outlined,
-            isSelected: widget.currentIndex == 1,
-            onTap: () => _onItemTapped(1),
+          _buildNavItem(
+            index: 1,
+            iconPath: 'assets/icons/explore.svg',
+            label: 'Community',
+            route: AppRoutes.paycassoCommunity,
+          ),
+          _buildNavItem(
+            index: 2,
+            iconPath: 'assets/icons/profile.svg',
+            label: 'Profile',
+            route: AppRoutes.profile, // Update with profile route when available
           ),
         ],
       ),
     );
   }
-}
 
-class _NavBarItem extends StatelessWidget {
-  final IconData icon;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  const _NavBarItem({
-    required this.icon,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildNavItem({
+    required int index,
+    required String iconPath,
+    required String label,
+    required String route,
+  }) {
+    final isSelected = widget.currentIndex == index;
     return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: Icon(
-        icon,
-        color: isSelected ? Colors.purple[200] : Colors.grey[400],
-        size: 28,
+      onTap: () {
+        widget.onIndexChanged(index);
+        if (widget.currentIndex != index) {
+          Navigator.pushReplacementNamed(context, route);
+        }
+      },
+      child: Container(
+        height: 60.h,
+        margin: EdgeInsets.symmetric(horizontal: 10.w),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.white : Colors.transparent,
+          borderRadius: BorderRadius.circular(35.r),
+        ),
+        child: Row(
+          //mainAxisSize: MainAxisSize.min,
+          children: [
+            // Icon(
+            //   icon,
+            //   color: isSelected ? Colors.black : Colors.grey[600],
+            //   size: 24.sp,
+            // ),
+            SvgPicture.asset(
+              iconPath,
+              width: index == 1 ? 32.w : 24.w,
+              height: index == 1 ? 32.w : 24.w,
+              
+              // colorFilter: ColorFilter.mode(
+              //   isSelected ? Colors.black : Colors.grey[600]!,
+              //   BlendMode.srcIn,
+              // ),
+              color: isSelected ? Colors.black : Colors.grey[600],
+            ),
+            if (isSelected) ...[
+              SizedBox(width: 8.w),
+              Text(
+                label,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ],
+        ),
       ),
     );
   }

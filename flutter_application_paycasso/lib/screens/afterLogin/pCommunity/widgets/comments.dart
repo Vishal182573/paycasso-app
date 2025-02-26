@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CommentButton extends StatelessWidget {
   final String commentCount;
@@ -33,11 +34,17 @@ class CommentButton extends StatelessWidget {
               top: 0,
               bottom: 0,
               child: Center(
-                child: Icon(
-                  Icons.chat_bubble_outline,
+                // child: Icon(
+                //   Icons.chat_bubble_outline,
+                //   color: Colors.white,
+                //   size: 22.sp,
+                // ),
+                child: SvgPicture.asset(
+                  'assets/icons/comments.svg',
+                  width: 22.w,
+                  height: 22.w,
                   color: Colors.white,
-                  size: 22.sp,
-                ),
+                )
               ),
             ),
             Positioned(

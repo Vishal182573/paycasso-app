@@ -67,7 +67,7 @@ class _PaycassoCommunityState extends State<PaycassoCommunity> {
                       CircleAvatar(
                         radius: 20.r,
                         backgroundImage:
-                            AssetImage('assets/images/profile.png'),
+                            AssetImage('assets/images/Avatar.png'),
                       ),
                       SizedBox(width: 12.w),
                       Text(

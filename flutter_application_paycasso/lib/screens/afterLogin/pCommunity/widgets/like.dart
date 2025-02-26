@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iconsax/iconsax.dart';
 
 class LikeButton extends StatefulWidget {
   final String likeCount;
@@ -34,7 +35,7 @@ class _LikeButtonState extends State<LikeButton> {
         child: Stack(
           children: [
             Positioned(
-              left: 12.w,
+              left: 8.w,
               top: 0,
               bottom: 0,
               child: Center(

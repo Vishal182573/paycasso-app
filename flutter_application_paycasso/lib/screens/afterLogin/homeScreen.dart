@@ -34,6 +34,24 @@ class _HomeScreenState extends State<HomeScreen> {
       'amount': '\$10.49',
       'logo': 'assets/icons/chatgpt_logo.png',
     },
+    {
+      'title': 'Figma',
+      'subtitle': 'Due in 4 days',
+      'amount': '\$14.00',
+      'logo': 'assets/icons/figma_logo.png',
+    },
+    {
+      'title': 'Canva',
+      'subtitle': 'Bill Paid',
+      'amount': '\$6.99',
+      'logo': 'assets/icons/canva_logo.png',
+    },
+    {
+      'title': 'Chatgpt',
+      'subtitle': 'Due in a week',
+      'amount': '\$10.49',
+      'logo': 'assets/icons/chatgpt_logo.png',
+    },
   ];
 
   @override
@@ -316,6 +334,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+      // extendBody: true,
       bottomNavigationBar: CustomNavigationBar(
         currentIndex: _currentIndex,
         onIndexChanged: (index) {
@@ -341,11 +360,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.grey[900],
                 borderRadius: BorderRadius.circular(16.r),
               ),
-              child: Image.asset(
-                logoPath,
-                width: 24.w,
-                height: 24.w,
+              // child: Center(
+              //   child: Container(
+              //     width: 32.w,
+              //     height: 32.w,
+              //     decoration: BoxDecoration(
+              //       color: Colors.white.withOpacity(0.1),
+              //       shape: BoxShape.circle,
+              //     ),
+              child: Center(
+                child: Image.asset(
+                  logoPath,
+                  width: 40.w,
+                  height: 40.w,
+                ),
               ),
+              //),
             ),
             SizedBox(width: 16.w),
             Expanded(

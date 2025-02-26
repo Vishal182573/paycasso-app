@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_paycasso/screens/afterLogin/followCommunity.dart';
 import 'package:flutter_application_paycasso/screens/afterLogin/homeScreen.dart';
 import 'package:flutter_application_paycasso/screens/afterLogin/paycassoCommunity.dart';
+import 'package:flutter_application_paycasso/screens/afterLogin/profile/profileScreen.dart';
 import 'package:flutter_application_paycasso/screens/beforeLogin/onboarding.dart';
 
 class AppRoutes {
@@ -9,6 +10,7 @@ class AppRoutes {
   static const String followCommunity = '/follow-community';
   static const String home = '/home';
   static const String paycassoCommunity = '/paycasso-community';
+  static const String profile = '/profile';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -51,6 +53,7 @@ class AppRoutes {
       followCommunity: (context) => const FollowCommunity(),
       home: (context) => const HomeScreen(),
       paycassoCommunity: (context) => const PaycassoCommunity(),
+      profile: (context) => const ProfileScreen(),
     };
   }
 }
