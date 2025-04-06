@@ -18,6 +18,7 @@ dependencies:
   uuid: ^3.0.7
   country_picker: ^2.0.25
   qr_code_scanner: ^1.0.1
+  qr_flutter: ^4.1.0
   
 
 dev_dependencies:

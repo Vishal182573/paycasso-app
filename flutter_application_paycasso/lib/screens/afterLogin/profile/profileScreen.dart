@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_paycasso/utils/bottomNavigationBar.dart';
 import 'package:flutter_application_paycasso/screens/afterLogin/profile/paymentMethods.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -12,6 +13,92 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   int _currentIndex = 2; // Profile tab selected
+  final String publicKey =
+      "0xgeje1532hn"; // This will be replaced with your actual public key
+
+  void _showProfileQR() {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.all(24.w),
+          decoration: BoxDecoration(
+            color: Colors.grey[900],
+            borderRadius: BorderRadius.circular(20.r),
+            border: Border.all(
+              color: Colors.grey[800]!,
+              width: 1,
+            ),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Profile Public Key',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              SizedBox(height: 24.h),
+              Container(
+                padding: EdgeInsets.all(16.w),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: QrImageView(
+                  data: publicKey, // Using the public key for QR code
+                  version: QrVersions.auto,
+                  size: 200.w,
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                ),
+              ),
+              SizedBox(height: 16.h),
+              // Display the public key below QR code
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                decoration: BoxDecoration(
+                  color: Colors.grey[800],
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: Text(
+                  publicKey,
+                  style: TextStyle(
+                    color: Colors.grey[300],
+                    fontSize: 14.sp,
+                    fontFamily: 'Monospace',
+                  ),
+                ),
+              ),
+              SizedBox(height: 16.h),
+              Text(
+                'Scan to connect',
+                style: TextStyle(
+                  color: Colors.grey[400],
+                  fontSize: 14.sp,
+                ),
+              ),
+              SizedBox(height: 16.h),
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(
+                  'Close',
+                  style: TextStyle(
+                    color: Colors.blue[300],
+                    fontSize: 16.sp,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,18 +114,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Center(
                   child: Column(
                     children: [
-                      Container(
-                        width: 100.w,
-                        height: 100.w,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.grey[800]!,
-                            width: 2,
-                          ),
-                          image: const DecorationImage(
-                            image: AssetImage('assets/images/profile.png'),
-                            fit: BoxFit.cover,
+                      GestureDetector(
+                        onTap: _showProfileQR,
+                        child: Container(
+                          width: 100.w,
+                          height: 100.w,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.grey[800]!,
+                              width: 2,
+                            ),
+                            image: const DecorationImage(
+                              image: AssetImage('assets/images/profile.png'),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
