@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_paycasso/utils/bottomNavigationBar.dart';
+import 'package:flutter_application_paycasso/screens/afterLogin/profile/paymentMethods.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -135,14 +136,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
           padding: EdgeInsets.symmetric(vertical: 24.h),
           child: InkWell(
             onTap: () {
-              // Handle menu item tap
+              if (title == 'Payment Methods') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PaymentMethodsScreen(),
+                  ),
+                );
+              }
+              // Handle other menu items...
             },
             child: Row(
               children: [
                 Container(
                   width: 40.w,
                   height: 40.w,
-                  
                   child: Icon(
                     icon,
                     color: Colors.grey[400],
@@ -179,7 +187,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         Container(
           height: 1,
-          color: Colors.grey[900], 
+          color: Colors.grey[900],
         ),
       ],
     );

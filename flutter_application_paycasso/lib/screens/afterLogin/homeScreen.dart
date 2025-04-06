@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_paycasso/utils/bottomNavigationBar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:ui';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,6 +15,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex =
       0; // Setting to 1 as Ethereum icon is selected in screenshot
   bool showAllSubscriptions = false;
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  QRViewController? controller;
 
   final List<Map<String, String>> subscriptionItems = [
     {
@@ -54,6 +57,81 @@ class _HomeScreenState extends State<HomeScreen> {
     },
   ];
 
+  void _onQRViewCreated(QRViewController controller) {
+    this.controller = controller;
+    controller.scannedDataStream.listen((scanData) {
+      if (scanData.code != null) {
+        controller.pauseCamera();
+        Navigator.pop(context, scanData.code);
+      }
+    });
+  }
+
+  void _showQRScanner() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        height: MediaQuery.of(context).size.height,
+        child: Stack(
+          children: [
+            QRView(
+              key: qrKey,
+              onQRViewCreated: _onQRViewCreated,
+              overlay: QrScannerOverlayShape(
+                borderColor: Colors.white,
+                borderRadius: 10,
+                borderLength: 30,
+                borderWidth: 10,
+                cutOutSize: 300,
+              ),
+            ),
+            Positioned(
+              top: 40.h,
+              left: 16.w,
+              child: IconButton(
+                icon: const Icon(Icons.close, color: Colors.white),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ),
+            Positioned(
+              bottom: 100.h,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: Text(
+                  'Scan QR Code',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ).then((value) {
+      if (value != null) {
+        // Handle the scanned QR code result
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('QR Code scanned: $value'),
+            backgroundColor: Colors.grey[900],
+          ),
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,36 +155,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.white,
                       ),
                     ),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 12.w,
-                        vertical: 6.h,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[900],
-                        borderRadius: BorderRadius.circular(20.r),
-                        border: Border.all(
-                          color: Colors.grey[800]!,
-                          width: 1,
+                    GestureDetector(
+                      onTap: _showQRScanner,
+                      child: Container(
+                        padding: EdgeInsets.all(8.w),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey[800]!),
+                          borderRadius: BorderRadius.circular(8.r),
                         ),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.diamond_outlined,
-                            color: Colors.blue[300],
-                            size: 16.sp,
-                          ),
-                          SizedBox(width: 4.w),
-                          Text(
-                            '500 PC', //Paycasso Coins
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
+                        child: Icon(
+                          Icons.qr_code_scanner,
+                          color: Colors.white,
+                          size: 20.sp,
+                        ),
                       ),
                     ),
                   ],
