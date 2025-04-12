@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_paycasso/utils/bottomNavigationBar.dart';
 import 'package:flutter_application_paycasso/screens/afterLogin/profile/paymentMethods.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:qr_flutter/qr_flutter.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -49,13 +52,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12.r),
                 ),
-                child: QrImageView(
-                  data: publicKey, // Using the public key for QR code
-                  version: QrVersions.auto,
-                  size: 200.w,
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.black,
-                ),
+                // child: QrImageView(
+                //   data: publicKey, // Using the public key for QR code
+                //   version: QrVersions.auto,
+                //   size: 200.w,
+                //   backgroundColor: Colors.white,
+                //   foregroundColor: Colors.black,
+                // ),
               ),
               SizedBox(height: 16.h),
               // Display the public key below QR code
@@ -97,6 +100,94 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _handleLogout() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+
+      // First try to sign out from Google
+      try {
+        await googleSignIn.signOut();
+      } catch (e) {
+        print('Google Sign Out Error: $e');
+        // Continue with Firebase logout even if Google sign out fails
+      }
+
+      // Sign out from Firebase
+      await FirebaseAuth.instance.signOut();
+
+      // Show success message
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Successfully logged out'),
+          backgroundColor: Colors.green,
+        ),
+      );
+
+      // Navigate to onboarding screen
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        '/onboarding',
+        (Route<dynamic> route) => false,
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error logging out: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  void _showLogoutConfirmation() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.grey[900],
+          title: Text(
+            'Confirm Logout',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20.sp,
+            ),
+          ),
+          content: Text(
+            'Are you sure you want to logout?',
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 16.sp,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  color: Colors.grey[400],
+                  fontSize: 16.sp,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context); // Close dialog
+                await _handleLogout();
+              },
+              child: Text(
+                'Logout',
+                style: TextStyle(
+                  color: Colors.red[400],
+                  fontSize: 16.sp,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -191,9 +282,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 // Logout Button
                 SizedBox(height: 16.h),
                 TextButton(
-                  onPressed: () {
-                    // Handle logout
-                  },
+                  onPressed: _showLogoutConfirmation,
                   child: Text(
                     'Logout',
                     style: TextStyle(

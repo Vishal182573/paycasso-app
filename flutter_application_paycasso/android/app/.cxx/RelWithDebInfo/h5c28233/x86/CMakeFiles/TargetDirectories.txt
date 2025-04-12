@@ -1,0 +1,2 @@
+/Users/anshmittal/paycasso-app/flutter_application_paycasso/android/app/.cxx/RelWithDebInfo/h5c28233/x86/CMakeFiles/edit_cache.dir
+/Users/anshmittal/paycasso-app/flutter_application_paycasso/android/app/.cxx/RelWithDebInfo/h5c28233/x86/CMakeFiles/rebuild_cache.dir

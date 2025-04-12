@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "90920664897",
+    "project_id": "paycasso",
+    "storage_bucket": "paycasso.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90920664897:android:2ee7498bbc80b70c326bc0",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_paycasso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "90920664897-k4dtu9vaievqf2i9qha6vorpog9fi8u4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_application_paycasso",
+            "certificate_hash": "337faf3402d9f04261af391a7654ff29e5fdacd9"
+          }
+        },
+        {
+          "client_id": "90920664897-527dmatgreada3tpqr7gd7irmtkjl00m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOGrdrqUNODsBDM7Ow2P_XUziS_K-G6oA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "90920664897-527dmatgreada3tpqr7gd7irmtkjl00m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

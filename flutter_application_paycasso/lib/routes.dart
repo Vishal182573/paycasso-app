@@ -4,9 +4,11 @@ import 'package:flutter_application_paycasso/screens/afterLogin/homeScreen.dart'
 import 'package:flutter_application_paycasso/screens/afterLogin/paycassoCommunity.dart';
 import 'package:flutter_application_paycasso/screens/afterLogin/profile/profileScreen.dart';
 import 'package:flutter_application_paycasso/screens/beforeLogin/onboarding.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AppRoutes {
-  static const String onboarding = '/';
+  static const String onboarding = '/onboarding';
   static const String followCommunity = '/follow-community';
   static const String home = '/home';
   static const String paycassoCommunity = '/paycasso-community';
@@ -39,6 +41,13 @@ class AppRoutes {
         return PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) =>
               const PaycassoCommunity(),
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero,
+        );
+      case profile:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const ProfileScreen(),
           transitionDuration: Duration.zero,
           reverseTransitionDuration: Duration.zero,
         );

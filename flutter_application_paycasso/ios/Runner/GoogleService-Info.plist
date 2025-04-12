@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>90920664897-c4gjc3811ggj6ba6qjk583e67ep5ltik.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.90920664897-c4gjc3811ggj6ba6qjk583e67ep5ltik</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>90920664897-k4dtu9vaievqf2i9qha6vorpog9fi8u4.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB8WBxOwULlbIBUUT5ngmyE1AkLHiD0u0E</string>
+	<key>GCM_SENDER_ID</key>
+	<string>90920664897</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.flutterApplicationPaycasso</string>
+	<key>PROJECT_ID</key>
+	<string>paycasso</string>
+	<key>STORAGE_BUCKET</key>
+	<string>paycasso.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:90920664897:ios:5cb4bcc21e33f9e3326bc0</string>
+</dict>
+</plist>

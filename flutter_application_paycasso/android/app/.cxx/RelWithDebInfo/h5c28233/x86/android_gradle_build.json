@@ -1,0 +1,28 @@
+{
+  "buildFiles": [
+    "/Users/anshmittal/Development/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/anshmittal/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/anshmittal/paycasso-app/flutter_application_paycasso/android/app/.cxx/RelWithDebInfo/h5c28233/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/anshmittal/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/anshmittal/paycasso-app/flutter_application_paycasso/android/app/.cxx/RelWithDebInfo/h5c28233/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {},
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/Users/anshmittal/Library/Android/sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/Users/anshmittal/Library/Android/sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": []
+}
