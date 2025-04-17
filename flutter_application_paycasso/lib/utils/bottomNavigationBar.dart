@@ -36,14 +36,14 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             label: 'Home',
             route: AppRoutes.home,
           ),
+          // _buildNavItem(
+          //   index: 1,
+          //   iconPath: 'assets/icons/explore.svg',
+          //   label: 'Community',
+          //   route: AppRoutes.paycassoCommunity,
+          // ),
           _buildNavItem(
             index: 1,
-            iconPath: 'assets/icons/explore.svg',
-            label: 'Community',
-            route: AppRoutes.paycassoCommunity,
-          ),
-          _buildNavItem(
-            index: 2,
             iconPath: 'assets/icons/profile.svg',
             label: 'Profile',
             route: AppRoutes.profile, // Update with profile route when available

@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_application_paycasso/providers/app_auth_provider.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -24,32 +26,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     });
 
     try {
-      // Sign out first to ensure account picker shows up
-      await _googleSignIn.signOut();
-
-      final GoogleSignInAccount? account = await _googleSignIn.signIn();
-      if (account != null) {
-        final GoogleSignInAuthentication auth = await account.authentication;
-        final credential = GoogleAuthProvider.credential(
-          accessToken: auth.accessToken,
-          idToken: auth.idToken,
+      final success = await context.read<AppAuthProvider>().signInWithGoogle();
+      if (success) {
+        Navigator.pushReplacementNamed(context, AppRoutes.home);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Failed to sign in with Google'),
+            backgroundColor: Colors.red,
+          ),
         );
-
-        // Sign in to Firebase
-        final UserCredential userCredential =
-            await FirebaseAuth.instance.signInWithCredential(credential);
-
-        if (userCredential.user != null) {
-          print("Signed in: ${userCredential.user!.displayName}");
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            AppRoutes.followCommunity,
-            (route) => false,
-          );
-        }
       }
     } catch (error) {
-      print('Google Sign In Error: $error');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error signing in: $error'),

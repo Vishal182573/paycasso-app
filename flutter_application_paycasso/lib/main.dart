@@ -1,41 +1,36 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_paycasso/firebase_options.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart' as provider;
+import 'providers/app_auth_provider.dart';
+import 'widgets/auth_gate.dart';
 
 import 'routes.dart';
 import 'screens/beforeLogin/onboarding.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  try {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-  } catch (e) {
-    print('Firebase initialization error: $e');
-  }
-  runApp(const ProviderScope(child: MainApp()));
+  await Firebase.initializeApp();
+  runApp(const MyApp());
 }
 
-class MainApp extends ConsumerWidget {
-  const MainApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return ScreenUtilInit(
-      designSize: const Size(440, 956),
-      minTextAdapt: true,
-      builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Paycasso',
-          theme: ThemeData(fontFamily: 'Poppins'),
-          home: const AuthGate(),
-          routes: AppRoutes.getRoutes(),
-        );
-      },
+  Widget build(BuildContext context) {
+    return provider.ChangeNotifierProvider(
+      create: (_) => AppAuthProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Paycasso',
+        theme: ThemeData(fontFamily: 'Poppins'),
+        home: const AuthGate(),
+        routes: AppRoutes.getRoutes(),
+      ),
     );
   }
 }

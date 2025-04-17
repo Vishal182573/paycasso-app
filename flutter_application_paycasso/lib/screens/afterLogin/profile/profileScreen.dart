@@ -3,8 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_paycasso/utils/bottomNavigationBar.dart';
 import 'package:flutter_application_paycasso/screens/afterLogin/profile/paymentMethods.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_application_paycasso/providers/app_auth_provider.dart';
 // import 'package:qr_flutter/qr_flutter.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -105,28 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _handleLogout() async {
     try {
-      final GoogleSignIn googleSignIn = GoogleSignIn();
-
-      // First try to sign out from Google
-      try {
-        await googleSignIn.signOut();
-      } catch (e) {
-        print('Google Sign Out Error: $e');
-        // Continue with Firebase logout even if Google sign out fails
-      }
-
-      // Sign out from Firebase
-      await FirebaseAuth.instance.signOut();
-
-      // Show success message
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Successfully logged out'),
-          backgroundColor: Colors.green,
-        ),
-      );
-
-      // Navigate to onboarding screen
+      await context.read<AppAuthProvider>().logout();
       Navigator.of(context).pushNamedAndRemoveUntil(
         '/onboarding',
         (Route<dynamic> route) => false,

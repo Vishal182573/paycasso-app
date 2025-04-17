@@ -337,7 +337,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'My subscriptions',
+                      'Transaction History',
                       style: TextStyle(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w400,
@@ -371,22 +371,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Subscription List
                 _buildSubscriptionItem(
                   'Figma',
-                  'Due in 4 days',
-                  '\$14.00',
+                  'xa2334edhui9987tggjjvbn',
+                  '14.00',
                   'assets/icons/figma_logo.png',
                   hasDivider: true,
                 ),
                 _buildSubscriptionItem(
                   'Canva',
-                  'Bill Paid',
-                  '\$6.99',
+                  'a45d3hko97ygcswe5ccbou',
+                  '6.99',
                   'assets/icons/canva_logo.png',
                   hasDivider: true,
                 ),
                 _buildSubscriptionItem(
                   'Chatgpt',
-                  'Due in a week',
-                  '\$10.49',
+                  'ss3535tggfds332adf533aw',
+                  '10.49',
                   'assets/icons/chatgpt_logo.png',
                   hasDivider: false,
                 ),
