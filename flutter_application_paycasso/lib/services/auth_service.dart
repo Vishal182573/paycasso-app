@@ -5,7 +5,16 @@ import 'package:local_auth/local_auth.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final LocalAuthentication _localAuth = LocalAuthentication();
+  LocalAuthentication? _localAuth;
+
+  AuthService() {
+    try {
+      _localAuth = LocalAuthentication();
+    } catch (e) {
+      print('Failed to initialize LocalAuthentication: $e');
+      // Leave _localAuth as null
+    }
+  }
 
   // Check if user is logged in
   bool get isLoggedIn => _auth.currentUser != null;
@@ -16,13 +25,22 @@ class AuthService {
   // Check and authenticate with biometrics
   Future<bool> authenticateWithBiometrics() async {
     try {
+      // Initialize if not already done
+      _localAuth ??= LocalAuthentication();
+      
+      // Null check before using
+      if (_localAuth == null) {
+        print('LocalAuthentication not available');
+        return false;
+      }
+      
       final bool canAuthenticateWithBiometrics =
-          await _localAuth.canCheckBiometrics;
+          await _localAuth!.canCheckBiometrics;
       if (!canAuthenticateWithBiometrics) {
         return false;
       }
 
-      return await _localAuth.authenticate(
+      return await _localAuth!.authenticate(
         localizedReason: 'Authenticate to access the app',
         options: const AuthenticationOptions(
           stickyAuth: true,
